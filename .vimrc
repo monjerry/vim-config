@@ -5,15 +5,9 @@ set foldlevel=99
 nnoremap <space> za
 
 " Python stuff
-au BufNewFile *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-
+autocmd Filetype python setlocal expandtab autoindent tabstop=4 shiftwidth=4 fileformat=unix
+nnoremap <silent> L :tabnext<CR>
+nnoremap <silent> H :tabprev<CR>
 
 map h :NERDTreeTabsToggle<CR>
 set nocompatible              " be iMproved, required
@@ -23,16 +17,17 @@ set hlsearch
 set ruler
 set encoding=utf-8
 
+" Coffee script
+autocmd BufRead,BufNewFile   *.coffee setl sw=2 sts=2
+
 au FileType python setl sw=4 sts=4 et
 " set the runtime path to include Vundle and initialize"
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+Plugin 'flazz/vim-colorschemes'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'ervandew/supertab'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'fatih/vim-go'
@@ -48,6 +43,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'kien/ctrlp.vim'
+Plugin 'leafgarland/typescript-vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -56,4 +52,7 @@ Plugin 'kien/ctrlp.vim'
 call vundle#end()            " required
 syntax enable
 filetype plugin indent on    " required
+
+colorscheme molokai
+let g:typescript_indent_disable = 1
 
